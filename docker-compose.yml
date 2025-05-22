@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  app1:
+    build: ./app
+    container_name: app1
+
+  app2:
+    build: ./app
+    container_name: app2
+
+  app3:
+    build: ./app
+    container_name: app3
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - app1
+      - app2
+      - app3
